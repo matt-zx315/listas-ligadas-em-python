@@ -5,7 +5,6 @@ class Node:
     def __init__(self, _data):
         self.data = _data
         self.next = None
-        self.flag = False
 
 
 class LinkedList:
@@ -77,6 +76,17 @@ class LinkedList:
         
     
     
+    def find_loop_end(self):
+        hash_table = set()
+        pointer = self.head
+        
+        while pointer.next not in hash_table:
+            hash_table.add(pointer)
+            pointer = pointer.next
+        
+        return pointer
+    
+    
     def find_loop_floyd(self):
         slow = self.head
         fast = self.head
@@ -89,6 +99,10 @@ class LinkedList:
                 return (slow, fast)
         
         return None
+    
+    
+    def break_loop(self):
+        self.find_loop_end().next = None
     
     
     def get_loop_length(self):
@@ -125,4 +139,7 @@ l_list.create_loop(36, 65)
 print(l_list.get_loop_length())
 
 l_list.create_loop(36, 26)
+print(l_list.get_loop_length())
+
+l_list.break_loop()
 print(l_list.get_loop_length())
