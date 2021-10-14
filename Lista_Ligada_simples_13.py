@@ -58,14 +58,61 @@ class LinkedList:
     
     
     def remove_duplicates(self):
-        pointer = self.head
-        data_set = set()
+        current = self.head
+        previous = None         # Aponta para o nó anterior
         
-        while(pointer and pointer.next):
-            if pointer.data in set:
-                aux = pointer.next
-                pointer.next = pointer.next.next
-                aux = None
+        dupes = set()
+        
+        while current:
+            if current.data not in dupes:
+                dupes.add(current.data)
+                previous = current
+            else:
+                previous.next = current.next
             
-            data_set.append(pointer.data)
-            pointer = pointer.next
+            current = current.next
+
+
+list1 = LinkedList()
+list1.append(10)
+list1.append(11)
+list1.append(11)
+list1.append(12)
+list1.append(12)
+list1.append(13)
+list1.append(14)
+list1.append(15)
+list1.append(15)
+list1.append(15)
+list1.append(15)
+list1.append(16)
+list1.append(17)
+list1.print_list()
+
+list1.remove_duplicates()
+list1.print_list()
+
+list2 = LinkedList()
+list2.append(20)
+list2.append(40)
+list2.append(15)
+list2.append(15)
+list2.append(16)
+list2.append(8)
+list2.append(8)
+list2.append(8)
+list2.append(16)
+list2.append(7)
+list2.append(5)
+list2.append(6)
+list2.append(2)
+list2.append(2)
+list2.append(40)
+list2.append(20)
+list2.append(35)
+list2.append(76)
+list2.append(59)
+list2.print_list()
+
+list2.remove_duplicates()
+list2.print_list()
